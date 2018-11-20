@@ -1,117 +1,93 @@
-window.onload = function() {
+$(function(){
+    
+    var v1, v2, op;
+    
+    $("input[name=btn]").click(function(){
+        $("#resultado").val($("#resultado").val() + $(this).val());
 
-var current,
-    screen,
-    output,
-    limit,
-    zero,
-    period,
-    operator;
+    })
+    
+    $("input[name=ce]").click(function(){
+        $("#resultado").val("");
 
-    screen = document.getElementById("result");
+    })
+    
+    $("input[name=c]").click(function(){
+        var len = $("#resultado").val().length;
 
-var elem = document.querySelectorAll(".num");
 
-      var len = elem.length;
+        var valor = $("#resultado").val();
+        
+        valor = valor.replace(valor.charAt(len - 1), "");
 
-      for(var i = 0; i < len; i++ ) {
-
-        elem[i].addEventListener("click",function() {
-
-            num = this.value;
-
-            output = screen.innerHTML +=num;
-
-            limit = output.length;
-
-         if(limit > 16 ) {
-         alert("Sorry no more input is allowed");
-
-       }
-
-     },false);
-
-    }
-
-    document.querySelector(".zero").addEventListener("click",function() {
-
-        zero = this.value;
-
-        if(screen.innerHTML === "") {
-
-           output = screen.innerHTML = zero;
+        $("#resultado").val(valor);
+    })
+    
+    $("input[name=soma]").click(function(){
+        if($("#resultado").val() != ""){
+            v1 = parseFloat($("#resultado").val());
+            $("#resultado").val("");
+            op = "soma";
+        }else{
+            alert("Insira um valor para a soma");
         }
-
-        else if(screen.innerHTML === output) {
+    })
+    
+    $("input[name=subtracao]").click(function(){
+        if($("#resultado").val() != ""){
+            v1 = parseFloat($("#resultado").val());
+            $("#resultado").val("");
+            op = "subtracao";
+        }else{
+            alert("Insria um valor para a subtração");
+        }
+    })
+    
+    $("input[name=multiplicacao]").click(function(){
+        if($("#resultado").val() != ""){
+            v1 = parseFloat($("#resultado").val());
+            $("#resultado").val("");
+            op = "multiplicacao";
+        }else{
+            alert("Insira um valor para a multiplicação");
+        }
+    })
+    
+    $("input[name=divisao]").click(function(){
+        if($("#resultado").val() != ""){
+            v1 = parseFloat($("#resultado").val());
+            $("#resultado").val("");
+            op = "divisao";
+        }else{
+            alert("Insira um valor para a divisão");
+        }
+    })
+    
+    $("input[name=igual]").click(function(){
+        if($("#resultado").val() != ""){
+            v2 = parseFloat($("#resultado").val());
+            $("#resultado").val("");
             
-                     output = screen.innerHTML +=zero;
-
+            if(op == "soma"){
+                $("#resultado").val(v1+v2);
+            }
+            
+            if(op == "subtracao"){
+                $("#resultado").val(v1-v2);
+            }
+            
+            if(op == "multiplicacao"){
+                $("#resultado").val(v1*v2);
+            }
+            
+            if(op == "divisao"){
+                $("#resultado").val(v1/v2);
+            }
+            
+            
+        }else{
+            alert("Digite outro valor para a efetuação do cálculo");
         }
-
-    },false);
-
-    document.querySelector(".period").addEventListener("click",function() {
-
-        period = this.value;
-
-        if(screen.innerHTML === "") {
-
-         output = screen.innerHTML = screen.innerHTML.concat("0.");
-
-         }
-
-        else if(screen.innerHTML === output) {
-
-          screen.innerHTML = screen.innerHTML.concat(".");
-
-        }
-
-    },false);
-
-
-    document.querySelector("#eqn-bg").addEventListener("click",function() {
-
-      if(screen.innerHTML === output) {
-
-        screen.innerHTML = eval(output);
-      }
-
-      else {
-            screen.innerHTML = "";
-      }
-
-    },false);
-
- document.querySelector("#delete").addEventListener("click",function() {
-
-        screen.innerHTML = "";
-
-    },false);
-
-
-     var elem1 = document.querySelectorAll(".operator");
-
-      var len1 = elem1.length;
-
-      for(var i = 0; i < len1; i++ ) {
-
-        elem1[i].addEventListener("click",function() {
-
-        operator = this.value;
-
-         if(screen.innerHTML === "") {
-
-            screen.innerHTML = screen.innerHTML.concat("");
-
-        }
-
-        else if(output) {
-
-            screen.innerHTML = output.concat(operator);
-
-        }
-
-    },false);
-
-      }
-}
+    })
+    
+});
